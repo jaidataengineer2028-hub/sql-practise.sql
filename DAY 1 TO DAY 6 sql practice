@@ -1,1 +1,176 @@
+CREATE DATABASE friends;
 
+CREATE TABLE dost(
+ id INT PRIMARY KEY,
+ name VARCHAR(50),
+ age INT NOT NULL
+);
+
+INSERT INTO dost VALUES(7, 'satyendra makwana' ,19);
+INSERT INTO dost VALUES(2, 'akshat sehgal' ,19);
+INSERT INTO dost VALUES(3, 'harshil arrora' ,19);
+INSERT INTO dost VALUES(4, 'abhibhav yadav' ,19);
+INSERT INTO dost VALUES(5, 'shubham aggrawal' ,19);
+INSERT INTO dost VALUES(6, 'aayushman daksh' ,19);
+
+SELECT*FROM dost;
+
+
+CREATE DATABASE workers;
+
+CREATE TABLE employees (
+ id INT PRIMARY KEY,
+ name  VARCHAR (50),
+ age INT NOT NULL
+);
+
+INSERT INTO employees VALUES(1, 'RAKESH' ,21);
+INSERT INTO employees VALUES(2, 'MUKESH' ,22);
+INSERT INTO employees VALUES(3, 'JAYKESH' ,23);
+INSERT INTO employees VALUES(4, 'LANKESH' ,24);
+
+SELECT*FROM employees;
+
+
+CREATE TABLE chamche(
+ id INT,
+ name VARCHAR(50),
+ age INT NOT NULL,
+ PRIMARY KEY(id,name)
+);
+
+INSERT INTO chamche VALUES(1, 'ankita bhandari' ,23);
+INSERT INTO chamche VALUES(2, 'ankita bhandari' ,24);
+INSERT INTO chamche VALUES(1, 'akshita' ,23);
+
+SELECT*FROM chamche;
+
+SELECT * FROM public.chamche
+ORDER BY id ASC, name ASC 
+
+
+CREATE TABLE payworkers(
+ id INT PRIMARY KEY,
+ name VARCHAR(50),
+ age INT NOT NULL,
+ CHECK (age>=18)
+);
+
+INSERT INTO payworkers VALUES(1, 'REKHA' ,18);
+INSERT INTO payworkers VALUES(2, 'SEEMA' ,19);
+INSERT INTO payworkers VALUES(3, 'ANANYA' ,17);
+
+SELECT*FROM payworkers;
+
+
+CREATE DATABASE college;
+
+CREATE TABLE student(
+ rollno INT PRIMARY KEY,
+ name VARCHAR(50),
+ marks INT, 
+ grade VARCHAR(1),
+ city VARCHAR(20)
+);
+
+INSERT INTO student
+(rollno, name, marks, grade, city)
+VALUES
+(101, 'anil' ,78, 'C' , 'pune'),
+(102, 'bhumika' ,93, 'A' , 'mumbai'),
+(103, 'chetan' ,85, 'B' , 'mumbai'),
+(104, 'shruv' ,96, 'A' , 'delhi'),
+(105, 'emenule' ,12, 'F' , 'delhi'),
+(106, 'farah' ,82, 'B' , 'delhi');
+
+SELECT name,marks FROM student;
+SELECT DISTINCT city FROM student;
+SELECT*FROM student WHERE marks>80;
+SELECT*FROM student WHERE marks>80 AND city= 'mumbai';
+SELECT*FROM student WHERE marks>80 OR city= 'mumbai';
+SELECT*FROM student WHERE marks BETWEEN 80 AND 90;
+SELECT*FROM student WHERE city IN ('mumbai', 'delhi');
+SELECT*FROM student WHERE city NOT IN ('mumbai', 'delhi');
+SELECT*FROM student WHERE marks>80 LIMIT 2;
+SELECT*FROM student
+ORDER BY name DESC;
+SELECT*FROM student
+ORDER BY name ASC;
+SELECT AVG(marks)
+FROM student;
+SELECT COUNT(marks)
+FROM student;
+SELECT city, COUNT(name)
+FROM student
+GROUP BY city
+SELECT city,name, COUNT(name)
+FROM student
+GROUP BY city, name
+HAVING MAX(marks)>90;
+
+
+CREATE DATABASE collegue;
+
+CREATE TABLE student(
+ rollno INT PRIMARY KEY,
+ name VARCHAR(50),
+ marks INT, 
+ grade VARCHAR(1),
+ city VARCHAR(20)
+);
+
+INSERT INTO student
+(rollno, name, marks, grade, city)
+VALUES
+(101, 'anil' ,78, 'C' , 'pune'),
+(102, 'bhumika' ,93, 'A' , 'mumbai'),
+(103, 'chetan' ,85, 'B' , 'mumbai'),
+(104, 'shruv' ,96, 'A' , 'delhi'),
+(105, 'emenule' ,12, 'F' , 'delhi'),
+(106, 'farah' ,82, 'B' , 'delhi');
+
+UPDATE student
+SET marks='99'
+WHERE marks='96'
+
+SELECT*FROM student;
+
+DELETE FROM student
+WHERE marks<50;
+
+SELECT*FROM student;
+
+
+CREATE DATABASE university;
+
+CREATE TABLE dept(
+ id INT PRIMARY KEY,
+ name VARCHAR(50)
+);
+
+INSERT INTO dept VALUES
+(101, 'IT'),
+(102, 'DATA SCIENCE');
+
+UPDATE dept
+SET id=103
+WHERE id=101;
+
+SELECT*FROM dept;
+
+
+CREATE TABLE teacher(
+ id INT PRIMARY KEY,
+ name VARCHAR(50),
+ dept_id INT,
+ FOREIGN KEY (dept_id) REFERENCES dept(id)
+ ON DELETE CASCADE
+ ON UPDATE CASCADE
+);
+
+INSERT INTO teacher
+VALUES
+(1, 'sunita' ,101),
+(2, 'akshita' ,102);
+
+SELECT*FROM teacher;
